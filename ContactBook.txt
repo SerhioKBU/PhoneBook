@@ -1,0 +1,2 @@
+Contact: id ='1', name: 'Serhio', contact type: EMAIL, value ='serhio@mail.ua
+Contact: id ='1', name: 'Bogdan', contact type: PHONE, value ='+380441234578

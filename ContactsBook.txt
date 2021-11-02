@@ -1,0 +1,2 @@
+Contact: id='1', name='Ali', contactType=PHONE, value='+830772221133
+Contact: id='2', name='Ali', contactType=EMAIL, value='ali777@mail.ru
