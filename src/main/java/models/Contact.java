@@ -16,7 +16,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class Contact implements Serializable {
 
-    private Integer id;
+    private String id;
 
     @JsonProperty("name")
     private String name;

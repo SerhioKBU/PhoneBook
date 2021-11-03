@@ -5,6 +5,7 @@ import models.Contact;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,7 +13,7 @@ public abstract class AbstractFileContactService implements ContactService {
     protected abstract List<Contact> load();
     protected abstract void save(List<Contact> contacts);
     final File file;
-    List<Contact> contacts;
+    List<Contact> contacts = new ArrayList<>();;
 
     public AbstractFileContactService(File file) {
         this.file = file;
@@ -24,7 +25,7 @@ public abstract class AbstractFileContactService implements ContactService {
         int nextId = 0;
         int id;
         for (int i = 0; i < contacts.size(); i++) {
-            if((id = (contacts.get(i).getId())) > nextId){
+            if((id = Integer.parseInt(contacts.get(i).getId())) > nextId){
                 nextId = id;
             }
         }
@@ -59,8 +60,8 @@ public abstract class AbstractFileContactService implements ContactService {
 
     @Override
     public void addContact(Contact contact) {
+        contact.setId(String.valueOf(getNextId(contacts)));
         contacts.add(contact);
-        contact.setId((int) getNextId(contacts));
         save(contacts);
     }
 

@@ -1,5 +1,6 @@
 package services;
 
+import lombok.Getter;
 import models.Contact;
 
 import java.io.FileWriter;
@@ -15,7 +16,7 @@ public class InMemoryContactsService implements ContactService {
         int nextId = 0;
         int id;
         for (int i = 0; i < contacts.size(); i++) {
-            if((id = (contacts.get(i).getId())) > nextId){
+            if((id = Integer.parseInt(contacts.get(i).getId())) > nextId){
                 nextId = id;
             }
         }
@@ -48,7 +49,7 @@ public class InMemoryContactsService implements ContactService {
 
     @Override
     public void addContact(Contact contact) {
-        contact.setId(Math.toIntExact(getNextId()));
+        contact.setId(String.valueOf(getNextId()));
         contacts.add(contact);
     }
 

@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum ContactType {
-    @JsonProperty("e-mail")
+    @JsonProperty("email")
     EMAIL("E-Mail"),
     @JsonProperty("phone")
     PHONE("Telephone");

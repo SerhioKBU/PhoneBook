@@ -4,6 +4,7 @@ import models.Contact;
 import models.ContactType;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,25 +18,26 @@ public class CSVRealisationFileContactService extends AbstractFileContactService
 
     @Override
     public List<Contact> load() {
-        if(!file.exists()){
+        if (!file.exists()) {
             save(List.of());
-        }
-            List<Contact> contacts = new ArrayList<>();
-            try (BufferedReader bufferedReader = new BufferedReader
-                    (new FileReader(String.valueOf(file)))) {
-                contacts = bufferedReader.lines()
-                        .map(l -> l.split("|"))
-                        .map(c -> new Contact(
-                                Integer.parseInt(c[0]),
-                                c[1],
-                                ContactType.valueOf(c[3]),
-                                c[4]))
+            try (FileReader fr = new FileReader(file, StandardCharsets.UTF_8);) {
+                BufferedReader br = new BufferedReader(fr);
+                List<String[]> list = br.lines()
+                        .map(str -> str.split(","))
                         .collect(Collectors.toList());
-
+                for (String[] c : list) {
+                    contacts.add(new Contact(
+                            c[0],
+                            c[1],
+                            ContactType.valueOf(c[2]),
+                            c[3])
+                    );
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return contacts;
+        }
+        return contacts;
     }
 
     @Override

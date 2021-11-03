@@ -1,7 +1,9 @@
 package services;
+import lombok.Getter;
 import models.Contact;
 
 import java.util.List;
+
 
 public interface ContactService {
     List<Contact> showAllContacts();
