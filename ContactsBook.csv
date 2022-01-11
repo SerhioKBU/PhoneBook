@@ -1,1 +1,2 @@
-Contact: id ='1', name: 'Max', contact type: EMAIL, value ='max@mail.oi
+Contact: id ='1', name: 'Artem', contact type: EMAIL, value ='arte@mail.com
+Contact: id ='2', name: 'Kirill', contact type: PHONE, value ='+7800556633

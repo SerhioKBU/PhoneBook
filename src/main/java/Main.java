@@ -41,12 +41,12 @@ public class Main {
         String menuItem = scanner.nextLine();
 
         switch (menuItem) {
-            case "1": authorService = new InternalAuthorService("admin", "admin");
+            case "1": authorService = new InternalAuthorService("1", "1");
                 break;
             case "2": authorService = new ExternalAuthorService();
                 break;
             default:
-                System.out.println("Please enter again");
+                System.err.println("Please enter again");
                 return;
         }
 

@@ -2,14 +2,8 @@
 <ArrayList>
   <item>
     <id>1</id>
-    <name>Roma</name>
-    <type>EMAIL</type>
-    <value>roma123@gmail.com</value>
-  </item>
-  <item>
-    <id>2</id>
-    <name>Katya</name>
-    <type>PHONE</type>
-    <value>+380667772204</value>
+    <name>Lukmanov</name>
+    <type>phone</type>
+    <value>+380994445566</value>
   </item>
 </ArrayList>

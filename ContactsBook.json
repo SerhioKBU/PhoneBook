@@ -1,11 +1,11 @@
 [ {
-  "id" : 1,
-  "name" : "Serhio",
-  "type" : "e-mail",
-  "value" : "serhio@mail.ua"
-}, {
-  "id" : 1,
-  "name" : "Bogdan",
+  "id" : "1",
+  "name" : "Ivan",
   "type" : "phone",
-  "value" : "+380441234578"
+  "value" : "+380662320011"
+}, {
+  "id" : "2",
+  "name" : "Artem",
+  "type" : "email",
+  "value" : "tema@mail.com"
 } ]

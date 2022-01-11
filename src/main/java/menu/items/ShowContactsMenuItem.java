@@ -2,10 +2,7 @@ package menu.items;
 
 import menu.ContactView;
 import menu.MenuItem;
-import models.Contact;
 import services.ContactService;
-
-import java.util.List;
 
 public class ShowContactsMenuItem implements MenuItem {
     ContactService contactService;
@@ -23,8 +20,7 @@ public class ShowContactsMenuItem implements MenuItem {
 
     @Override
     public void run() {
-        List<Contact> contacts = contactService.showAllContacts();
-        contactView.writeContacts(contacts);
+        contactView.writeContacts(contactService.showAllContacts());
     }
 
     @Override

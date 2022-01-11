@@ -34,6 +34,7 @@ public class ServerContactsService implements ContactService {
             }
 
         } catch (RuntimeException exception) {
+            exception.printStackTrace();
             throw exception;
         }
         return contacts;
@@ -60,6 +61,7 @@ public class ServerContactsService implements ContactService {
             }
 
         } catch (RuntimeException exception) {
+            exception.printStackTrace();
             throw exception;
         }
         return contacts;
@@ -86,6 +88,7 @@ public class ServerContactsService implements ContactService {
             }
 
         } catch (RuntimeException exception) {
+            exception.printStackTrace();
             throw exception;
         }
         return contacts;
@@ -102,16 +105,18 @@ public class ServerContactsService implements ContactService {
                     contact,
                     StatusAddResponse.class);
         } catch (RuntimeException exception) {
-
+            exception.printStackTrace();
             throw exception;
         }
     }
 
     @Override
     public void removeContact(int index) {
+        throw new RuntimeException("That operation isn't supported by server");
     }
 
     @Override
     public void saveContact(List<Contact> contacts) {
+        throw new RuntimeException("That operation isn't supported by server");
     }
 }

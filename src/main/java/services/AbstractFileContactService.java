@@ -12,8 +12,8 @@ import java.util.stream.Collectors;
 public abstract class AbstractFileContactService implements ContactService {
     protected abstract List<Contact> load();
     protected abstract void save(List<Contact> contacts);
-    final File file;
-    List<Contact> contacts = new ArrayList<>();;
+    protected final File file;
+    List<Contact> contacts = new ArrayList<>();
 
     public AbstractFileContactService(File file) {
         this.file = file;
@@ -69,7 +69,7 @@ public abstract class AbstractFileContactService implements ContactService {
     public void saveContact(List<Contact> contacts) {
         FileWriter writer = null;
         try {
-            writer = new FileWriter("ContactBook.txt");
+            writer = new FileWriter("ContactsBook.txt");
             for (Contact element: contacts) {
                 writer.write(element + System.getProperty("line.separator"));
             }

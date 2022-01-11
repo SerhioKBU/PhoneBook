@@ -1,5 +1,6 @@
 package services;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import models.Contact;
 
@@ -14,25 +15,22 @@ public class JsonRealisationFileContactService extends AbstractFileContactServic
     }
 
         @Override
-        public List<Contact> load () {
-            if (!file.exists()) {
-                save(List.of());
-            }
-            List<Contact> contacts = new ArrayList<>();
+        public List<Contact> load() {
+            if (!file.exists()) return new ArrayList<>();
+
             ObjectMapper objectMapper = new ObjectMapper();
+
             try (BufferedReader bufferedReader = new BufferedReader
                     (new FileReader(file))) {
-                for (Contact person : contacts) {
-                    objectMapper.readValue(bufferedReader, Contact.class);
-                }
+                    contacts = objectMapper.readValue(bufferedReader, new TypeReference<List<Contact>>() {});
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return contacts;
+            return contacts == null ? new ArrayList<>() : contacts;
         }
 
 
-        public void save (List < Contact > contacts) {
+        public void save(List < Contact > contacts) {
             ObjectMapper objectMapper = new ObjectMapper();
             try (FileWriter fileWriter = new FileWriter(file, StandardCharsets.UTF_8)) {
                 objectMapper.writerWithDefaultPrettyPrinter().writeValue(fileWriter, contacts);

@@ -18,12 +18,11 @@ public class XMLRealisationFileContactService extends AbstractFileContactService
         if(!file.exists()){
             save(List.of());
         }
-        List<Contact> contacts = new ArrayList<>();
         XmlMapper xmlMapper = new XmlMapper();
         try (BufferedReader bufferedReader = new BufferedReader
                 (new FileReader(file))) {
             for (Contact person: contacts) {
-                xmlMapper.readValue(bufferedReader, Contact.class);
+                xmlMapper.readValue(bufferedReader, contacts.getClass());
             }
         } catch (IOException e) {
             e.printStackTrace();

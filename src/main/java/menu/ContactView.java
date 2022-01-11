@@ -17,6 +17,11 @@ public class ContactView {
 
     public void writeFindNameContacts(List<Contact> contacts) {
         System.out.println("----------- FOUND NAME CONTACTS -----------");
+        if(contacts.size() == 0) {
+            System.out.println("Requested data couldn't find. Try again!");
+            return;
+        }
+        System.out.printf("%-3s %-10s %-10s %-15s%s", "id", "Name", "Type",  "Value", System.lineSeparator());
         for (Contact c : contacts) {
             System.out.printf(
                     "%s - %s[%s] : %s\n",
@@ -27,6 +32,11 @@ public class ContactView {
 
     public void writeContacts(List<Contact> contacts) {
         System.out.println("----------- CONTACTS -----------");
+        if(contacts.size() == 0) {
+            System.out.println("PhoneBook is empty");
+            return;
+        }
+        System.out.printf("%-3s %-12s %-10s %-15s%s", "id", "Name", "Type",  "Value", System.lineSeparator());
         for (Contact c : contacts) {
             System.out.printf(
                     "%s - %s[%s] : %s\n",
