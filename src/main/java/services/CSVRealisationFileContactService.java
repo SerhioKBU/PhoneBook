@@ -18,21 +18,29 @@ public class CSVRealisationFileContactService extends AbstractFileContactService
 
     @Override
     public List<Contact> load() {
+        contacts = null;
         if (!file.exists()) {
             save(List.of());
+
             try (FileReader fr = new FileReader(file, StandardCharsets.UTF_8);) {
                 BufferedReader br = new BufferedReader(fr);
-                List<String[]> list = br.lines()
-                        .map(str -> str.split(","))
-                        .collect(Collectors.toList());
-                for (String[] c : list) {
-                    contacts.add(new Contact(
-                            c[0],
-                            c[1],
-                            ContactType.valueOf(c[2]),
-                            c[3])
-                    );
-                }
+                contacts = br.lines()
+                        .map(c -> c.split(","))
+                        .map(arr -> new Contact()
+                                .setId(String.valueOf(Long.parseLong(arr[0])))
+                                .setName(arr[1])
+                                .setContactType(ContactType.valueOf(arr[2]))
+                                .setValue(arr[3])
+                        ).collect(Collectors.toList());
+
+//                for (String[] c : list) {
+//                    contacts.add(new Contact(
+//                            c[0],
+//                            c[1],
+//                            ContactType.valueOf(c[2]),
+//                            c[3])
+//                    );
+//                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -43,10 +51,18 @@ public class CSVRealisationFileContactService extends AbstractFileContactService
     @Override
     public void save(List<Contact> contacts){
         try {
-            FileWriter writer = new FileWriter(String.valueOf(file));
-            for (Contact element: contacts) {
-                writer.write(element + System.getProperty("line.separator"));
+            FileWriter writer = new FileWriter(file);
+            for (int i = 0; i < contacts.size(); i++) {
+                writer.write(contacts.get(i).getId()
+                        + ","
+                        + contacts.get(i).getName()
+                        + ","
+                        + contacts.get(i).getContactType()
+                        + ","
+                        + contacts.get(i).getValue()
+                        + System.lineSeparator());
             }
+            writer.flush();
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();

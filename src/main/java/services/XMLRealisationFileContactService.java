@@ -1,5 +1,6 @@
 package services;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import models.Contact;
@@ -15,19 +16,16 @@ public class XMLRealisationFileContactService extends AbstractFileContactService
     }
 
     public List<Contact> load() {
-        if(!file.exists()){
-            save(List.of());
-        }
+        if(!file.exists()) return new ArrayList<>();
+
         XmlMapper xmlMapper = new XmlMapper();
         try (BufferedReader bufferedReader = new BufferedReader
                 (new FileReader(file))) {
-            for (Contact person: contacts) {
-                xmlMapper.readValue(bufferedReader, contacts.getClass());
-            }
+                contacts = xmlMapper.readValue(bufferedReader, new TypeReference<List<Contact>>() {});
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return contacts;
+        return contacts == null ? new ArrayList<>() : contacts;
     }
 
 

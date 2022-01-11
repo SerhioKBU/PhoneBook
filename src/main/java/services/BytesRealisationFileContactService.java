@@ -14,14 +14,16 @@ public class BytesRealisationFileContactService extends AbstractFileContactServi
 
     @SneakyThrows
     public List<Contact> load() {
-        if(!file.exists()){
-            save(List.of());
-        }
+        if(!file.exists()) return new ArrayList<>();
+
         List<Contact> contacts = new ArrayList<>();
         try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
-            for (int i = 0; i < contacts.size(); i++) {
+            while (true){
                 Contact c = (Contact) ois.readObject();
+                if (c == null) {
+                    break;
+                }
                 contacts.add(c);
             }
         } catch (IOException | ClassNotFoundException e) {
@@ -32,8 +34,8 @@ public class BytesRealisationFileContactService extends AbstractFileContactServi
 
     public void save(List<Contact> contacts) {
         try (ObjectOutputStream object = new ObjectOutputStream(new FileOutputStream(file))) {
-            for (int i = 0; i < contacts.size(); i++) {
-                object.writeObject(contacts.get(i));
+            for (Contact contact : contacts) {
+                object.writeObject(contact);
             }
             object.flush();
         } catch (IOException e) {

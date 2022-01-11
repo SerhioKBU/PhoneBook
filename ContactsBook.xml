@@ -6,4 +6,10 @@
     <type>phone</type>
     <value>+380994445566</value>
   </item>
+  <item>
+    <id>2</id>
+    <name>Lolita</name>
+    <type>email</type>
+    <value>lola@mail.com</value>
+  </item>
 </ArrayList>
