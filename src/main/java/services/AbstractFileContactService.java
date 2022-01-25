@@ -24,18 +24,17 @@ public abstract class AbstractFileContactService implements ContactService {
         contacts = load();
         int nextId = 0;
         int id;
-        for (int i = 0; i < contacts.size(); i++) {
-            if((id = Integer.parseInt(contacts.get(i).getId())) > nextId){
+        for (Contact contact : contacts) {
+            if ((id = Integer.parseInt(contact.getId())) > nextId) {
                 nextId = id;
             }
         }
         return ++nextId;
     }
 
-
     @Override
     public List<Contact> showAllContacts() {
-        return contacts;
+        return load();
     }
 
     @Override

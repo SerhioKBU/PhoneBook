@@ -8,8 +8,8 @@ import java.util.Scanner;
 
 @AllArgsConstructor
 public class LoginMenu implements MenuItem {
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String RESET = "\u001B[0m";
     Scanner scanner;
     AuthorService authorizingService;
 
@@ -26,7 +26,7 @@ public class LoginMenu implements MenuItem {
         String password = scanner.nextLine();
         try{
             if (authorizingService.login(login, password)) {
-                System.out.println(ANSI_GREEN + "- You have authorised - " + ANSI_RESET);
+                System.out.println(GREEN + "- You have authorised - " + RESET);
             } else {
                 System.err.println("Login ERROR");
             }

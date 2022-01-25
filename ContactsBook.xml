@@ -12,4 +12,10 @@
     <type>email</type>
     <value>lola@mail.com</value>
   </item>
+  <item>
+    <id>3</id>
+    <name>Ura</name>
+    <type>phone</type>
+    <value>+380447890011</value>
+  </item>
 </ArrayList>

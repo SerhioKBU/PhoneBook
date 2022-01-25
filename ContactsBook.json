@@ -8,4 +8,9 @@
   "name" : "Artem",
   "type" : "email",
   "value" : "tema@mail.com"
+}, {
+  "id" : "3",
+  "name" : "Pron'",
+  "type" : "phone",
+  "value" : "+380997770011"
 } ]

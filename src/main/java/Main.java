@@ -17,55 +17,24 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    public static final String ANSI_PURPLE = "\u001B[35m";
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_Y = "\u001B[33m";
+    public static final String PURPLE = "\u001B[35m";
+    public static final String YELLOW = "\u001B[33m";
+    public static final String CYAN = "\u001B[36m";
+    public static final String RESET = "\u001B[0m";
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
         ContactService contactService;
         AuthorService authorService;
 
-//        if (!contactService.equals(new ServerContactsService())) {
-//            authorService = new InternalAuthorService("admin", "admin");
-//        } else {
-//            authorService = new ExternalAuthorService();
-//        }
-
-        System.out.println("Select Authorisation Type: \n " +
-                "- enter " + ANSI_PURPLE + "'1' " + ANSI_RESET + "for Internal Authorisation; \n " +
-                "- enter " + ANSI_PURPLE + "'2' " + ANSI_RESET + "for External Authorisation; \n" +
-                "---> ");
-
-        String menuItem = scanner.nextLine();
-
-        switch (menuItem) {
-            case "1": authorService = new InternalAuthorService("1", "1");
-                break;
-            case "2": authorService = new ExternalAuthorService();
-                break;
-            default:
-                System.err.println("Please enter again");
-                return;
-        }
-
-        List<MenuItem> menuAuthor = Arrays.asList(
-                new LoginMenu(scanner, authorService),
-                new RegistrationMenu(scanner, authorService)
-        );
-
-        Menu menu1 = new Menu(scanner, menuAuthor);
-        menu1.makeMenu();
-
-        System.out.println("Select SERVICE: \n" +
-                "- enter " + ANSI_PURPLE + "'1' " + ANSI_RESET + "for PC Memory saving; \n" +
-                "- enter " + ANSI_PURPLE + "'2' " + ANSI_RESET + "for Json Realisation File; \n" +
-                "- enter " + ANSI_PURPLE + "'3' " + ANSI_RESET + "for XML Realisation File; \n" +
-                "- enter " + ANSI_PURPLE + "'4' " + ANSI_RESET + "for CSV Realisation File; \n" +
-                "- enter " + ANSI_PURPLE + "'5' " + ANSI_RESET + "for Bytes Realisation File; \n" +
-                "- enter " + ANSI_PURPLE + "'6' " + ANSI_RESET + "for Server API connection; \n " +
-                " ---> ");
+        System.out.println("MENU SERVICES: \n" +
+                "- enter " + PURPLE + "'1' " + RESET + "for PC Memory saving; \n" +
+                "- enter " + PURPLE + "'2' " + RESET + "for Json Realisation File; \n" +
+                "- enter " + PURPLE + "'3' " + RESET + "for XML Realisation File; \n" +
+                "- enter " + PURPLE + "'4' " + RESET + "for CSV Realisation File; \n" +
+                "- enter " + PURPLE + "'5' " + RESET + "for Bytes Realisation File; \n" +
+                "- enter " + PURPLE + "'6' " + RESET + "for Server API connection;");
+        System.out.print("Select your service: ");
 
         String menuItems = scanner.nextLine();
         switch (menuItems){
@@ -90,8 +59,32 @@ public class Main {
                 return;
         }
 
-        System.out.println(ANSI_Y +"- Choosing Service is "+
-                contactService.getClass().getSimpleName() + " -" + ANSI_RESET);
+        System.out.println(YELLOW +"- Selected Service is "+
+                contactService.getClass().getSimpleName() + " -" + RESET);
+
+        if (contactService.getClass().getSimpleName().equals("ServerContactsService")) {
+            authorService = new ExternalAuthorService();
+        } else {
+            authorService = new InternalAuthorService("admin", "admin");
+        }
+
+        System.out.println(PURPLE + "- Selected Authorisation Service is "
+                + authorService.getClass().getSimpleName() + " -" + RESET);
+
+        if (authorService.getClass().getSimpleName().equals("ExternalAuthorService")) {
+            System.out.println(CYAN +"- Enter your LOGIN or create new account using REGISTRATION"+ RESET);
+        } else {
+            System.out.println(CYAN +"- Enter your LOGIN (REGISTRATION options unsupported!))"+ RESET);
+        }
+
+
+        List<MenuItem> menuAuthor = Arrays.asList(
+                new LoginMenu(scanner, authorService),
+                new RegistrationMenu(scanner, authorService)
+        );
+
+        Menu menu1 = new Menu(scanner, menuAuthor);
+        menu1.makeMenu();
 
         if (authorService.isAuthoring()) {
 

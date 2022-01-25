@@ -1,2 +1,0 @@
-Contact: id ='1', name: 'Ivan', contact type: PHONE, value ='+380662320011
-Contact: id ='2', name: 'Artem', contact type: EMAIL, value ='tema@mail.com

@@ -12,12 +12,12 @@ import java.util.List;
 import java.util.Map;
 
 public class ServerContactsService implements ContactService {
-    List<Contact> contacts = new ArrayList<>();
     ServerService serverService = new ServerService();
     private static final String URL = "https://mag-contacts-api.herokuapp.com";
 
     @Override
     public List<Contact> showAllContacts() {
+        List<Contact> contacts = new ArrayList<>();
         try {
             ShowAllResponse showAllResponse =
                     serverService.makeGetRequest(URL + "/contacts",
@@ -43,6 +43,7 @@ public class ServerContactsService implements ContactService {
     @Override
     public List<Contact> findContactName(String name) {
         FindRequest findRequest = new FindRequest().setName(name);
+        List<Contact> contacts = new ArrayList<>();
         try {
 
             FindResponse findResponse =
@@ -70,6 +71,7 @@ public class ServerContactsService implements ContactService {
     @Override
     public List<Contact> findContactValue(String start) {
         FindRequest findRequest = new FindRequest().setValue(start);
+        List<Contact> contacts = new ArrayList<>();
 
         try {
             FindResponse findResponse =

@@ -3,6 +3,8 @@ package menu;
 import lombok.RequiredArgsConstructor;
 import models.Contact;
 import models.ContactType;
+import utils.EmailValidator;
+import utils.PhoneValidator;
 
 import java.util.List;
 import java.util.Locale;
@@ -11,9 +13,9 @@ import java.util.Scanner;
 @RequiredArgsConstructor
 public class ContactView {
     private final Scanner scanner;
-    //List<Contact> contacts;
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_RESET = "\u001B[0m";
+    List<Contact> contacts;
+    public static final String RED = "\u001B[31m";
+    public static final String RESET = "\u001B[0m";
 
     public void writeFindNameContacts(List<Contact> contacts) {
         System.out.println("----------- FOUND NAME CONTACTS -----------");
@@ -51,7 +53,7 @@ public class ContactView {
             System.out.print("Enter contact's id which you wanna remove: ");
             System.out.print(" ");
             if (!scanner.hasNextInt()) {
-                System.out.println(ANSI_RED + "Entered value isn't a number. Try again!" + ANSI_RESET);
+                System.out.println(RED + "Entered value isn't a number. Try again!" + RESET);
                 scanner.nextLine();
             } else {
                 break;
@@ -81,9 +83,18 @@ public class ContactView {
         }
         System.out.println("Enter contact's name: ");
         String name = scanner.nextLine();
-        System.out.println("Enter contact: ");
-        String value = scanner.nextLine();
-
+        String value;
+        while (true) {
+            System.out.printf("Enter %s: ", type.getName());
+            value = scanner.nextLine();
+            if (type == ContactType.EMAIL && EmailValidator.emailValidate(value)){
+                break;
+            }
+            if (type == ContactType.PHONE && PhoneValidator.phoneValidate(value)){
+                break;
+            }
+            System.out.println(RED + "Incorrect value" + RESET);
+        }
         return new Contact()
                 .setName(name)
                 .setContactType(type)
